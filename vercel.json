@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "rag-chatbot-ui/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "app/main.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/app/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/rag-chatbot-ui"
+    }
+  ]
+}
